@@ -79,20 +79,37 @@ SELECT Site_name, Area FROM Site
 -- and then for the nests of each species compute the maximum of those average volumes, 
 -- and list by species in descending order of maximum volume. 
 
-SELECT (*) FROM species;
-
+-- create table for the average volume
 CREATE TEMP TABLE volume_table AS
-SELECT Nest_ID, AVG((3.14/6)*Width^2*Length) AS avg_volume FROM Bird_eggs
+SELECT Nest_ID, AVG((3.14/6)*Width^2*Length) AS avg_volume FROM Bird_eggs 
     GROUP By Nest_ID;
 
+-- create table to get max avg volume
 CREATE TEMP TABLE max_avg_vol AS
 SELECT Species, MAX(avg_volume) max_avg_vol
     FROM Bird_nests JOIN volume_table USING (Nest_ID)
     GROUP BY Species;
 
+-- select columns and join to get species and order
 SELECT Scientific_name, max_avg_vol FROM max_avg_vol 
     JOIN species
     ON Code = Species
     ORDER BY -max_avg_vol;
-
+    
+-- In one query
+WITH volume_table AS (
+    SELECT Nest_ID, AVG((3.14/6)*Width^2*Length) AS avg_volume -- calc avg volume
+    FROM Bird_eggs
+    GROUP BY Nest_ID
+),
+max_avg_vol AS (
+    SELECT Species, MAX(avg_volume) AS max_avg_vol -- get the max
+    FROM Bird_nests 
+    JOIN volume_table USING (Nest_ID) -- join 
+    GROUP BY Species
+)
+SELECT Scientific_name, max_avg_vol 
+FROM max_avg_vol 
+JOIN Species ON Code = Species -- join to get species
+ORDER BY -max_avg_vol; -- order
     
