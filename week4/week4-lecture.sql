@@ -82,3 +82,6 @@ SELECT Book_page, Nest_ID, Egg_num, Length, Width FROM Bird_eggs
 -- third way to answer the question
 SELECT Code FROM Species
     EXCEPT SELECT DISTINCT Species FROM Bird_nests;
+
+-- Wednesday 4 April 2024
+-- 
