@@ -6,14 +6,46 @@
 
 -- Create a Trigger --
 -- Part 1
+
 CREATE TRIGGER egg_filler
-    AFTER INSERT ON Bird_eggs
-    FOR EACH ROW
-    BEGIN
-        UPDATE Bird_eggs
-        SET Egg_num
-        WHERE ;
-    END;
+AFTER INSERT ON Bird_eggs
+FOR EACH ROW
+BEGIN
+    DECLARE max_egg_num INT;
+    SELECT MAX(Egg_num) INTO max_egg_num FROM Bird_eggs WHERE Nest_ID = NEW.Nest_ID;
+    DECLARE new_egg_num INT;
+    IF max_egg_num IS NULL THEN
+        SET new_egg_num = 1;
+    ELSE
+        SET new_egg_num = max_egg_num + 1;
+    END IF;
+    UPDATE Bird_eggs
+    SET Egg_num = new_egg_num
+    WHERE rowid = NEW.rowid;
+END;
+
+CREATE TRIGGER egg_filler
+AFTER INSERT ON Bird_eggs
+FOR EACH ROW
+BEGIN
+    UPDATE Bird_eggs
+    SET Egg_num = (
+        SELECT CASE
+            WHEN MAX(Egg_num) IS NULL THEN 1
+            ELSE MAX(Egg_num) + 1
+        END
+        FROM Bird_eggs
+        WHERE Nest_ID = NEW.Nest_ID
+    )
+    WHERE rowid = NEW.rowid;
+END;
+
+INSERT INTO Bird_eggs (Book_page, Year, Site, Nest_ID, Length, Width)
+VALUES ('b14.6', 2014, 'eaba', '14eabaage01', 12.34, 56.78);
+
+SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
+
+
 
 --Bash Essentials--
 -- 1. The output of all of these are the same. ls lists everything in the current directory. ls . does the same thing, we are just specifying that we are selecting all.  ls "$(pwd)/../week3" prints everthing in the directory that you specify. In this case, we started at the working directory, went out one level, and selected the week 3 folder, so we get the same output as the other two. 
