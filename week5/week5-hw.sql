@@ -11,23 +11,6 @@ CREATE TRIGGER egg_filler
 AFTER INSERT ON Bird_eggs
 FOR EACH ROW
 BEGIN
-    DECLARE max_egg_num INT;
-    SELECT MAX(Egg_num) INTO max_egg_num FROM Bird_eggs WHERE Nest_ID = NEW.Nest_ID;
-    DECLARE new_egg_num INT;
-    IF max_egg_num IS NULL THEN
-        SET new_egg_num = 1;
-    ELSE
-        SET new_egg_num = max_egg_num + 1;
-    END IF;
-    UPDATE Bird_eggs
-    SET Egg_num = new_egg_num
-    WHERE rowid = NEW.rowid;
-END;
-
-CREATE TRIGGER egg_filler
-AFTER INSERT ON Bird_eggs
-FOR EACH ROW
-BEGIN
     UPDATE Bird_eggs
     SET Egg_num = (
         SELECT CASE
@@ -40,11 +23,53 @@ BEGIN
     WHERE rowid = NEW.rowid;
 END;
 
-INSERT INTO Bird_eggs (Book_page, Year, Site, Nest_ID, Length, Width)
-VALUES ('b14.6', 2014, 'eaba', '14eabaage01', 12.34, 56.78);
+-- testing the trigger
+CREATE TEMP TABLE test_bird_eggs AS SELECT * FROM Bird_eggs;
 
+INSERT INTO test_bird_eggs (Book_page, Year, Site, Nest_ID, Length, Width)
+VALUES ('b14.6', 2014, 'eaba', '14eabaage01', 53.99, 14.99);
+
+SELECT * FROM test_bird_eggs WHERE Nest_ID = '14eabaage01';
+
+DROP TRIGGER egg_filler;
+
+--
+
+CREATE TRIGGER egg_filler
+AFTER INSERT ON Bird_eggs
+FOR EACH ROW
+BEGIN
+    UPDATE Bird_eggs
+    SET Egg_num = (
+        SELECT CASE
+            WHEN MAX(Egg_num) IS NULL THEN 1
+            ELSE MAX(Egg_num) + 1
+        END
+        FROM Bird_eggs
+        WHERE Nest_ID = NEW.Nest_ID),
+    Book_page = (
+        SELECT Book_page
+        FROM Bird_eggs
+        WHERE Nest_ID=NEW.Nest_ID
+    ),
+    "Year" = (
+        SELECT "Year"
+        FROM Bird_eggs
+        WHERE Nest_ID = NEW.Nest_ID),
+    Site = (
+        SELECT Site
+        FROM Bird_eggs
+        WHERE Nest_ID = NEW.Nest_ID
+    )
+    WHERE rowid = NEW.rowid;
+END;
+
+-- testing trigger
 SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
 
+INSERT INTO Bird_eggs
+    (Nest_ID, Length, Width)
+    VALUES ('14eabaage01', 12.34, 56.78);
 
 
 --Bash Essentials--
