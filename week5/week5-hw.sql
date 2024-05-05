@@ -33,43 +33,47 @@ SELECT * FROM test_bird_eggs WHERE Nest_ID = '14eabaage01';
 
 DROP TRIGGER egg_filler;
 
---
+-- part 2
 
-CREATE TRIGGER egg_filler
-AFTER INSERT ON Bird_eggs
+CREATE TRIGGER egg_filler_test
+AFTER INSERT ON test_bird_eggs
 FOR EACH ROW
 BEGIN
-    UPDATE Bird_eggs
+    UPDATE test_bird_eggs
     SET Egg_num = (
         SELECT CASE
             WHEN MAX(Egg_num) IS NULL THEN 1
             ELSE MAX(Egg_num) + 1
         END
-        FROM Bird_eggs
+        FROM test_bird_eggs
         WHERE Nest_ID = NEW.Nest_ID),
     Book_page = (
         SELECT Book_page
-        FROM Bird_eggs
+        FROM test_bird_eggs
         WHERE Nest_ID=NEW.Nest_ID
     ),
-    "Year" = (
-        SELECT "Year"
-        FROM Bird_eggs
+    Year = (
+        SELECT Year
+        FROM test_bird_eggs
         WHERE Nest_ID = NEW.Nest_ID),
     Site = (
         SELECT Site
-        FROM Bird_eggs
+        FROM test_bird_eggs
         WHERE Nest_ID = NEW.Nest_ID
     )
     WHERE rowid = NEW.rowid;
 END;
 
+
 -- testing trigger
 SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
+SELECT * FROM test_bird_eggs WHERE Nest_ID = '14eabaage01';
 
-INSERT INTO Bird_eggs
+
+INSERT INTO test_bird_eggs
     (Nest_ID, Length, Width)
     VALUES ('14eabaage01', 12.34, 56.78);
+
 
 
 --Bash Essentials--
