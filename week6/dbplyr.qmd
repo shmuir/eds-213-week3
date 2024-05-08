@@ -1,0 +1,91 @@
+---
+title: dbplyr
+date: "8 May 2024"
+---
+
+```{r}
+library(tidyverse)
+library(DBI)
+library(dbplyr) # in tidyverse
+library(duckdb)
+```
+
+## Connect to database
+```{r}
+conn <- DBI::dbConnect(duckdb::duckdb(), dbdir = here::here("week3/database.db"))
+DBI::dbListTables(conn)
+
+species <- tbl(conn, "Species")
+```
+
+## SQL Query
+```{r}
+df <- dbGetQuery(conn, "SELECT * FROM Species WHERE Code LIKE 'a%'") # where Code starts with a
+```
+
+## `dbplyr`
+
+Limitations
+- dbplyr is read only, you cannot write to a database
+
+```{r}
+# returns sql table
+species %>%
+  filter(Relevance == "Study species") %>%
+  select(Code, Scientific_name)
+
+# returns sql query
+species %>%
+  filter(Relevance == "Study species") %>%
+  select(Code, Scientific_name) %>%
+  show_query()
+
+# returns tibble
+species %>%
+  filter(Relevance == "Study species") %>%
+  select(Code, Scientific_name) %>%
+  collect()
+```
+
+##### Practice query
+```{r}
+species %>%
+  group_by(Relevance) %>%
+  summarise(count = n()) %>%
+  arrange(-count) %>%
+  collect()
+
+species %>%
+  group_by(Relevance) %>%
+  summarise(count = n()) %>%
+  show_query()
+```
+
+### Mutate
+```{r}
+new_sp_code <- species %>%
+  mutate(Code = paste0("X", Code)) %>%
+  collect()
+
+species %>%
+  mutate(Code = paste0("X", Code)) %>%
+  show_query()
+```
+
+### Join
+```{r}
+eggs_db <- tbl(conn, "Bird_eggs")
+nests_db <- tbl(conn, "Bird_nests")
+```
+
+```{r}
+left_join(nests_db, eggs_db, by = join_by(Book_page, Year, Site, Nest_ID)) %>%
+  show_query()
+```
+
+## Close database
+```{r}
+DBI::dbDisconnect(conn, shutdown = TRUE)
+```
+
+
