@@ -6,7 +6,6 @@
 
 -- Create a Trigger --
 -- Part 1
-
 CREATE TRIGGER egg_filler
 AFTER INSERT ON Bird_eggs
 FOR EACH ROW
@@ -24,55 +23,50 @@ BEGIN
 END;
 
 -- testing the trigger
-CREATE TEMP TABLE test_bird_eggs AS SELECT * FROM Bird_eggs;
-
-INSERT INTO test_bird_eggs (Book_page, Year, Site, Nest_ID, Length, Width)
+INSERT INTO Bird_eggs (Book_page, Year, Site, Nest_ID, Length, Width)
 VALUES ('b14.6', 2014, 'eaba', '14eabaage01', 53.99, 14.99);
 
-SELECT * FROM test_bird_eggs WHERE Nest_ID = '14eabaage01';
+SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
 
 DROP TRIGGER egg_filler;
 
 -- part 2
-
-CREATE TRIGGER egg_filler_test
-AFTER INSERT ON test_bird_eggs
+CREATE TRIGGER egg_filler
+AFTER INSERT ON Bird_eggs
 FOR EACH ROW
 BEGIN
-    UPDATE test_bird_eggs
+    UPDATE Bird_eggs
     SET Egg_num = (
         SELECT CASE
             WHEN MAX(Egg_num) IS NULL THEN 1
             ELSE MAX(Egg_num) + 1
         END
-        FROM test_bird_eggs
+        FROM Bird_eggs
         WHERE Nest_ID = NEW.Nest_ID),
     Book_page = (
         SELECT Book_page
-        FROM test_bird_eggs
+        FROM Bird_eggs
         WHERE Nest_ID=NEW.Nest_ID
     ),
     Year = (
         SELECT Year
-        FROM test_bird_eggs
+        FROM Bird_eggs
         WHERE Nest_ID = NEW.Nest_ID),
     Site = (
         SELECT Site
-        FROM test_bird_eggs
+        FROM Bird_eggs
         WHERE Nest_ID = NEW.Nest_ID
     )
     WHERE rowid = NEW.rowid;
 END;
 
-
 -- testing trigger
-SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
-SELECT * FROM test_bird_eggs WHERE Nest_ID = '14eabaage01';
-
-
-INSERT INTO test_bird_eggs
+INSERT INTO Bird_eggs
     (Nest_ID, Length, Width)
     VALUES ('14eabaage01', 12.34, 56.78);
+
+SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
+
 
 
 
