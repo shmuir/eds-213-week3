@@ -90,20 +90,20 @@ SELECT * FROM Bird_eggs WHERE Nest_ID = '14eabaage01';
 
 
 -- except
-bash query_timer.sh except 1000 'SELECT Code FROM Species
+bash query_timer.sh except 100 'SELECT Code FROM Species
 EXCEPT
 SELECT DISTINCT Species FROM Bird_nests;' \
     database.db timings.csv
 
 --join
-bash query_timer.sh join 1000 'SELECT Code
+bash query_timer.sh join 100 'SELECT Code
     FROM Bird_nests RIGHT JOIN Species
     ON Species = Code
     WHERE Nest_ID IS NULL;' \
     database.db timings.csv
 
 --not in
-bash query_timer.sh not 1000 'SELECT Code
+bash query_timer.sh not 100 'SELECT Code
     FROM Species
     WHERE Code NOT IN (SELECT DISTINCT Species FROM Bird_nests);' \
     database.db timings.csv
