@@ -1,0 +1,39 @@
+
+
+```{r}
+library(tidyverse)
+library(DBI)
+library(dbplyr) # in tidyverse
+library(duckdb)
+```
+
+```{r}
+conn <- DBI::dbConnect(duckdb::duckdb(), dbdir = here::here("week3/database.db"))
+DBI::dbListTables(conn)
+
+eggs <- tbl(conn, "Bird_eggs")
+nests <- tbl(conn, "Bird_nests")
+personnel <- tbl(conn, "Personnel")
+```
+
+```{r}
+eggs %>%
+  left_join(nests, by = join_by(Book_page, Year, Site, Nest_ID)) %>%
+  left_join(personnel, by = join_by(Observer == Abbreviation)) %>%
+  group_by(Name) %>%
+  summarise(total_eggs = n()) %>%
+  arrange(desc(total_eggs)) %>%
+  head(3)
+```
+
+```{r}
+eggs %>%
+  left_join(nests, by = join_by(Book_page, Year, Site, Nest_ID)) %>%
+  left_join(personnel, by = join_by(Observer == Abbreviation)) %>%
+  group_by(Name) %>%
+  summarise(total_eggs = n()) %>%
+  arrange(desc(total_eggs)) %>%
+  head(3) %>%
+  show_query()
+```
+
