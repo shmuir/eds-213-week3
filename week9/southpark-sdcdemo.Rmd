@@ -33,15 +33,13 @@ Q3. What would be the utility and information loss after implementing the anonym
 
 ```{r}
 library(sdcMicro)
-
-data <- read.csv("southpark-sdc.csv")
 ```
 
 ### Review Data Structure
 
 ```{r}
 #Read the CSV dataset into a data frame
-df <- read.csv("southpark-sdc.csv")
+df <- read.csv("week9/southpark-sdc.csv")
 
 #Show the list of variable names
 head(df)
@@ -59,13 +57,12 @@ As we can see, we will need to convert some of the variables first.
 The variables *stu-id*, *SSN*, *name*, and *dob* will soon be removed from the dataset as they are direct identifiers. Let's focus on the remaining ones that need to be converted before we can proceed.
 
 ```{r}
-fname = "southpark-sdc.csv"
+fname = "week9/southpark-sdc.csv"
 file <- read.csv(fname)
 file <- varToFactor(obj=file, var=c("zip","age", "sex","race","ethn", "snap", "income", "learn_dis","phys_dis"))
 
 #Convert to numeric math_sc and read_sc
-?
-
+file <- varToNumeric(obj = file, var = c("math_sc", "read_sc"))
 ```
 
 ## Answering Questions
@@ -81,18 +78,18 @@ To answer this question, we must first set up an ***SDC problem***. In other wor
 #Select categorical key variables - aka quasi-identifiers
 
 sdcInitial <- createSdcObj(dat=file,
-                       keyVars=c(?),
-                       numVars=c(?),
+                       keyVars=c("zip","age", "sex","race","ethn", "snap", "income", "learn_dis","phys_dis"),
+                       numVars=c("math_sc", "read_sc"),
                        weightVar=NULL,
                        hhId=NULL,
                        strataVar=NULL,
                        pramVars=NULL,
-                       excludeVars=c(?),
+                       excludeVars=c("ssn", "name", "dob"),
                        seed=0,
                        randomizeRecords=FALSE,
                        alpha=c(1))
 # Summary of object
-?
+sdcInitial
 ```
 
 **Discussion: What about the stu_id? Why are we keeping it?**
@@ -103,7 +100,7 @@ Check the results below and the number of observations that violate 2-5 anonymit
 
 ```{r}
 #The threshold depends on the size of the dataset and the access control (a conservative number for large surveys is 0.04)
-?
+sdcInitial@risk$global$risk
 ```
 
 Ouch! What does that score mean?
@@ -117,8 +114,7 @@ We can further inspect this issue before moving to the second question.
 #### Which observations/subjects have a higher risk of being re-identified?
 
 ```{r}
-?
-
+sdcInitial@risk$individual
 ```
 
 ### Q2. How can the risk of re-identification be significantly reduced?
