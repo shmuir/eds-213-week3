@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:systemMetadata xmlns:ns2="http://ns.dataone.org/service/types/v1" xmlns:ns3="http://ns.dataone.org/service/types/v2.0">
+    <serialVersion>0</serialVersion>
+    <identifier>urn:uuid:b4dc6ad3-cb1b-447d-ba6b-1b9119778f17</identifier>
+    <formatId>text/plain</formatId>
+    <size>81815</size>
+    <checksum algorithm="MD5">3811823ffb66d5591d688047c5f01c2d</checksum>
+    <submitter>http://orcid.org/0000-0002-1257-9502</submitter>
+    <rightsHolder>http://orcid.org/0000-0002-1257-9502</rightsHolder>
+    <accessPolicy>
+        <allow>
+            <subject>public</subject>
+            <permission>read</permission>
+        </allow>
+        <allow>
+            <subject>CN=knb-data-admins,DC=dataone,DC=org</subject>
+            <permission>read</permission>
+            <permission>write</permission>
+            <permission>changePermission</permission>
+        </allow>
+    </accessPolicy>
+    <replicationPolicy replicationAllowed="false"/>
+    <archived>false</archived>
+    <dateUploaded>2023-12-20T20:05:48.098+00:00</dateUploaded>
+    <dateSysMetadataModified>2023-12-20T20:05:48.098+00:00</dateSysMetadataModified>
+    <originMemberNode>urn:node:KNB</originMemberNode>
+    <authoritativeMemberNode>urn:node:KNB</authoritativeMemberNode>
+    <fileName>Natural_Pools_Habitat_Data.txt</fileName>
+</ns3:systemMetadata>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:systemMetadata xmlns:ns2="http://ns.dataone.org/service/types/v1" xmlns:ns3="http://ns.dataone.org/service/types/v2.0">
+    <serialVersion>0</serialVersion>
+    <identifier>doi:10.5063/F11N7ZK5</identifier>
+    <formatId>https://eml.ecoinformatics.org/eml-2.2.0</formatId>
+    <size>16941</size>
+    <checksum algorithm="MD5">f3be1a12f930d306c0e6f93a9075de21</checksum>
+    <submitter>http://orcid.org/0000-0002-9215-8643</submitter>
+    <rightsHolder>http://orcid.org/0000-0002-9215-8643</rightsHolder>
+    <accessPolicy>
+        <allow>
+            <subject>public</subject>
+            <permission>read</permission>
+        </allow>
+        <allow>
+            <subject>CN=knb-data-admins,DC=dataone,DC=org</subject>
+            <permission>read</permission>
+            <permission>write</permission>
+            <permission>changePermission</permission>
+        </allow>
+    </accessPolicy>
+    <replicationPolicy replicationAllowed="false"/>
+    <obsoletes>urn:uuid:7c4cd1f2-a001-46f5-8ac9-a1c9b2037502</obsoletes>
+    <archived>false</archived>
+    <dateUploaded>2024-05-09T10:21:26.502+00:00</dateUploaded>
+    <dateSysMetadataModified>2024-05-09T10:21:28.345+00:00</dateSysMetadataModified>
+    <originMemberNode>urn:node:KNB</originMemberNode>
+    <authoritativeMemberNode>urn:node:KNB</authoritativeMemberNode>
+    <fileName>Insect_functional_traits_on_arable_land_Finland.xml</fileName>
+</ns3:systemMetadata>

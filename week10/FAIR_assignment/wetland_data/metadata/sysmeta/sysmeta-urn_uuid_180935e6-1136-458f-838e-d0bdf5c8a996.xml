@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:systemMetadata xmlns:ns2="http://ns.dataone.org/service/types/v1" xmlns:ns3="http://ns.dataone.org/service/types/v2.0">
+    <serialVersion>0</serialVersion>
+    <identifier>urn:uuid:180935e6-1136-458f-838e-d0bdf5c8a996</identifier>
+    <formatId>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</formatId>
+    <size>41115</size>
+    <checksum algorithm="MD5">2c22f001adcf8dac1c7caed5cc9b67fd</checksum>
+    <submitter>http://orcid.org/0000-0002-1257-9502</submitter>
+    <rightsHolder>http://orcid.org/0000-0002-1257-9502</rightsHolder>
+    <accessPolicy>
+        <allow>
+            <subject>public</subject>
+            <permission>read</permission>
+        </allow>
+        <allow>
+            <subject>CN=knb-data-admins,DC=dataone,DC=org</subject>
+            <permission>read</permission>
+            <permission>write</permission>
+            <permission>changePermission</permission>
+        </allow>
+    </accessPolicy>
+    <replicationPolicy replicationAllowed="false"/>
+    <archived>false</archived>
+    <dateUploaded>2023-12-20T20:05:48.079+00:00</dateUploaded>
+    <dateSysMetadataModified>2023-12-20T20:05:48.079+00:00</dateSysMetadataModified>
+    <originMemberNode>urn:node:KNB</originMemberNode>
+    <authoritativeMemberNode>urn:node:KNB</authoritativeMemberNode>
+    <fileName>Playa_invert_traits_full_set.xlsx</fileName>
+</ns3:systemMetadata>

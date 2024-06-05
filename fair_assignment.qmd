@@ -1,0 +1,129 @@
+---
+title: "FAIR Assessment"
+author: "Sam Muir"
+format: html
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+```
+
+## Ephemeral wetland macroinvertebrate communities of the Great Plains
+
+```{r, include=FALSE}
+wetland <- read_csv("week10/FAIR_assignment/wetland_data/Great_Plains_Playas_Macroinvert_Counts.csv")
+```
+
+
+Findable
+1. Does the dataset have any identifiers assigned?
+
+**This dataset has a unique ID. It is not a DOI, but it seems to be unique to this data/repository.**
+
+2. Is the dataset identifier included in all metadata records/files describing the data?
+
+**Yes, the ID can be found in one of .xml files, though it is not very obvious within the file.**
+
+3. How is the data described with metadata?
+
+**Brief title and description, but there isn't any information on the variables that are in the data.**
+
+4. What type of repository or registry is the metadata record in?
+
+**Domain-specific repository: Knowledge Network of Biocomplexity (KNB)**
+
+5. How accessible is the data
+
+**Fully publicly accessible. There are no qualifiers stated.**
+
+6. Is the data available online without requiring specialized protocols or tools once access has been approved?
+
+**Data is available to download from the online data repository. There are no specified assitional protocols.**
+
+7. Will the metadata record be available even if the data are no longer available?
+
+**I'm not sure. There does not seem to be additional metadata, so I wuld assume no.**
+
+8. What (file) formats is the data available in?
+
+**In a structured, open standard, machine-readable format. The data is available in .txt, .xlxs, and .csv file formats **
+
+9. What best describes the types of vocabularies/ontologies/tagging schemas used to define the data elements?
+
+**There are not any descriptions of the data elements.**
+
+10. How is the metadata linked to other data and metadata (to enhance context and clearly indicate relationships)?
+
+**There are no links to other metadata.**
+
+11. Which of the following best describes the licence/usage rights attached to the data?
+
+**Standard machine-readable licence (Creative Commons).**
+
+12. How much provenance information has been captured to facilitate data reuse?
+
+**Partially recorded. The dataset description states that there are some environmental and community data are available for New Mexico, Texas, and Kansas, but that these were not included in analyses with the dataset.**
+
+
+## Insect functional traits on arable land, Finland 2020
+
+```{r, include=FALSE}
+insect <- readxl::read_excel("week10/FAIR_assignment/insect_data/Data_Toivonen_et_al__2024_AFE.xlsx")
+```
+
+Findable
+
+1. Does the dataset have any identifiers assigned?
+
+**Globally unique identifier, citable and persistent. There is a DOI.**
+
+2. Is the dataset identifier included in all metadata records/files describing the data?
+
+**Yes, the DOI is in the metadata .xml file.**
+
+3. How is the data described with metadata?
+
+**Comprehensively using a recognized formal machine-readable metadata schema. The data variables are well described.**
+
+4. What type of repository or registry is the metadata record in?
+
+**Data is discoverable through several data repositories. I foud it in KNB and DataOne.**
+
+Accessible
+5. How accessible is the data
+
+**Publicly accessible. There are no barriers to downloading the data.**
+
+6. Is the data available online without requiring specialized protocols or tools once access has been approved?
+
+**Files are available to download from the online data repository. It does not require additional tools as the data is an .xlxs.**
+
+7. Will the metadata record be available even if the data are no longer available?
+
+**I'm not sure. There is no not any mention of the metadata living separately from the data.**
+
+Interoperable
+8. What (file) formats is the data available in?
+
+**In a structured, open standard, machine-readable format. In this case, it is an .xlxs file.**
+
+9. What best describes the types of vocabularies/ontologies/tagging schemas used to define the data elements?
+
+**Standardised vocabularies/ontologies/schemas without global identifiers. The variables have definitions and descriptions for the most part. These mostly domain specific and do not link to explinations.**
+
+10. How is the metadata linked to other data and metadata (to enhance context and clearly indicate relationships)?
+
+**There are no links to other metadata provided.**
+
+Reusable
+11. Which of the following best describes the licence/usage rights attached to the data?
+
+**Standard machine-readable licence (Creative Commons).**
+
+12. How much provenance information has been captured to facilitate data reuse?
+
+**No provenance information is recorded.**
+
+## Which One Is Preferred?
+
+**I would choose the second dataset *Insect functional traits on arable land, Finland 2020*. The main reason is because it has much more metadata than the other data set. The variables are clearly defined, while the other dataset does not provide any additional information on variables. This metadata makes it much easier to understand, especially for someone outside of this field. It is also much easier to locate the DOI in the metadata, so someone could locate the data again in the case that the metadata is separated from the data.**

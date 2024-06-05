@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns3:systemMetadata xmlns:ns2="http://ns.dataone.org/service/types/v1" xmlns:ns3="http://ns.dataone.org/service/types/v2.0">
+    <serialVersion>0</serialVersion>
+    <identifier>urn:uuid:d544dff2-319a-4753-a1f1-48b6e1413285</identifier>
+    <formatId>https://eml.ecoinformatics.org/eml-2.2.0</formatId>
+    <size>6617</size>
+    <checksum algorithm="MD5">229ec866a3a04636b4f9c28d45cbd891</checksum>
+    <submitter>http://orcid.org/0000-0002-1257-9502</submitter>
+    <rightsHolder>http://orcid.org/0000-0002-1257-9502</rightsHolder>
+    <accessPolicy>
+        <allow>
+            <subject>CN=knb-data-admins,DC=dataone,DC=org</subject>
+            <permission>read</permission>
+            <permission>write</permission>
+            <permission>changePermission</permission>
+        </allow>
+        <allow>
+            <subject>public</subject>
+            <permission>read</permission>
+        </allow>
+    </accessPolicy>
+    <replicationPolicy replicationAllowed="false"/>
+    <obsoletes>urn:uuid:24f6a9e5-c1f4-4cc7-8cb9-c28cbd70c9a5</obsoletes>
+    <archived>false</archived>
+    <dateUploaded>2024-05-24T15:37:18.165+00:00</dateUploaded>
+    <dateSysMetadataModified>2024-05-24T15:37:20.764+00:00</dateSysMetadataModified>
+    <originMemberNode>urn:node:KNB</originMemberNode>
+    <authoritativeMemberNode>urn:node:KNB</authoritativeMemberNode>
+    <fileName>Ephemeral_wetland_macroinvertebrate_communities.xml</fileName>
+</ns3:systemMetadata>
