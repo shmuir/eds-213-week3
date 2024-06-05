@@ -8,16 +8,7 @@ format: html
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, include=FALSE}
-library(tidyverse)
-```
-
 ## Ephemeral wetland macroinvertebrate communities of the Great Plains
-
-```{r, include=FALSE}
-wetland <- read_csv("week10/FAIR_assignment/wetland_data/Great_Plains_Playas_Macroinvert_Counts.csv")
-```
-
 
 Findable
 1. Does the dataset have any identifiers assigned?
@@ -70,10 +61,6 @@ Findable
 
 
 ## Insect functional traits on arable land, Finland 2020
-
-```{r, include=FALSE}
-insect <- readxl::read_excel("week10/FAIR_assignment/insect_data/Data_Toivonen_et_al__2024_AFE.xlsx")
-```
 
 Findable
 
